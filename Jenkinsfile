@@ -1,16 +1,16 @@
 pipeline {
     agent any
-    stages {
-        stage('build'){
+    stages{
+        stage('Build'){
             steps {
                 sh 'mvn clean package'
             }
             post {
-                echo 'Now Archiving...'
-                archiveArtifacts artifacts: '**/target/*.war'
+                success {
+                    echo 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
             }
         }
-
     }
-
 }
